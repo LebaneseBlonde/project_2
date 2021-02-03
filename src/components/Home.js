@@ -13,9 +13,7 @@ export default function Home() {
           <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/>
         </div>
         <div className='container has-text-centered'>
-          <Link to={{
-            pathname: `project_2/artist/${artist}`
-            }}> 
+          <Link to={`project_2/artist/${artist}`}> 
             <button className='button'>Search</button>
           </Link>
         </div>
