@@ -7,15 +7,20 @@ import Footer from './components/Footer'
 import Artist from './components/Artist'
 import 'bulma'
 import './styles/style.scss'
+import Redux from 'redux'
 
 const App = () => {
 
+  const [artist, updateArtist] = useState('')
 
   return <BrowserRouter>
     <Navbar />
     <Switch>
-      <Route exact path="project_2/" component={Home} />
-      <Route exact path="project_2/artist/:strArtist" component={Artist}/>
+      {/* <Route exact path="project_2/" component={Home} artist={artist} updateArtist={updateArtist}/> */}
+      <Route exact path="/" component={Home}/>
+      {/* <Route exact path="project_2/artist/:strArtist" component={Artist} artist={artist}/> */}
+      <Route exact path="/artist/:strArtist" component={Artist}/>
+
     </Switch>
     <Footer />
   </BrowserRouter>

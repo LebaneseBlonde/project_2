@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+// const API_KEY = process.env.REACT_APP_APIKEY
 
-export default function Artist() {
-
+export default function Artist({artist}) {
   const [artistData, updateArtistData] = useState({})
+  const currentArtist = 'bonobo'
 
   // id= artistData.idArtist
   // name= artistData.strArtist
@@ -17,7 +19,7 @@ export default function Artist() {
   // image= artistData.strArtistWideThumb
 
   useEffect(() => {
-    axios.get(`www.theaudiodb.com/api/v1/json/523532/search.php?s=${artist}`)
+    axios.get(`https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${currentArtist}`)
       .then(({data}) => {
         const info = data.artists[0]
         updateArtistData(info)
@@ -25,5 +27,6 @@ export default function Artist() {
   }, [])
     
   return <div>
+    <p>{artistData.strArtist}</p>
   </div>
 }
