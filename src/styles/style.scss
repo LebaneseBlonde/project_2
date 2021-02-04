@@ -7,11 +7,18 @@
   justify-content: space-around;
   height: 80vh;
 }
-#imgBio, #tracksPlaylist, #nameDiscog {
+#imgInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+}
+#info {
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  justify-content: center;
+  width: 50%;
 }
 #info {
   display: flex;
@@ -33,4 +40,49 @@
   border-radius: 100%;
   border: 1px solid grey;
   background: rgb(184, 184, 184);
+}
+#nameDiscog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+#bio {
+  width: 80%;
+  margin: 0 0 30px 0;
+}
+#artistTitle {
+  margin: 10px 0 40px 0;
+}
+#discog {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 95%;
+}
+.discogItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.albumThumb{
+  height: 80px;
+  margin: 5px;
+}
+#tracksPlaylist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+}
+#topTracks {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 30px 0 0 0;
+}
+#topTitle {
+  margin: 60px 0 0 0;
 }

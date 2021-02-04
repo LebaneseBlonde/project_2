@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import Redux from 'redux'
+import 'bulma'
 
 import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Artist from './components/Artist'
-import 'bulma'
+import Mapbox from './components/Mapbox'
+import About from './components/About'
+
 import './styles/style.scss'
-import Redux from 'redux'
 
 const App = () => {
 
   return <BrowserRouter>
     <Navbar />
     <Switch>
-      {/* <Route exact path="project_2/" component={Home} artist={artist} updateArtist={updateArtist}/> */}
       <Route exact path="/" component={Home}/>
-      {/* <Route exact path="project_2/artist/:strArtist" component={Artist} artist={artist}/> */}
       <Route exact path="/artist/:strArtist" component={Artist}/>
-
+      <Route exact path="/map" component={Mapbox}/>
+      <Route exact path="/about" component={About}/>
     </Switch>
     <Footer />
   </BrowserRouter>
