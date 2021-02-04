@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import { Link, navigate } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function Home(props) {
 // export default function Home( { artist, updateArtist}) {
 
-console.log(props.inputValue)
+// console.log(props.inputValue)
 const artAlb = props.inputValue
 
   return <section className="hero is-primary is-fullheight-with-navbar">
@@ -20,9 +20,9 @@ const artAlb = props.inputValue
             width='200'
             value={props.inputValue}
             onChange={props.inputChanged}
-            onKeyDown={(event) => {if(event.key == 'Enter'){
-              console.log('navigate')
-              navigate(`/artist/${artAlb}`)
+            onKeyDown={(event) => {
+              if (event.key == 'Enter') {
+                props.history.push(`/artist/${artAlb}`)
             }}} 
           />
         </div>
