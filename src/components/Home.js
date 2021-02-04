@@ -6,7 +6,7 @@ function Home(props) {
 // export default function Home( { artist, updateArtist}) {
 
 // console.log(props.inputValue)
-const artistInput = props.inputValue
+const artAlb = props.inputValue
 
   return <section className="hero is-primary is-fullheight-with-navbar">
     <div className="hero-body">
@@ -22,12 +22,12 @@ const artistInput = props.inputValue
             onChange={props.inputChanged}
             onKeyDown={(event) => {
               if (event.key == 'Enter') {
-                props.history.push(`/artist/${artistInput}`)
+                props.history.push(`/artist/${artAlb}`)
             }}} 
           />
         </div>
         <div className='container has-text-centered'>
-          <Link to={`/artist/${artistInput}`}> 
+          <Link to={`/artist/${artAlb}`}> 
             <button className='button'>Search</button>
           </Link>
         </div>
