@@ -26,13 +26,35 @@ function Artist(props) {
         updateArtistData(info)
       })
   }, [])
+
+  function imageSelect() {
+    if (artistData.strArtistWideThumb) {
+      return artistData.strArtistWideThumb
+    } else {
+      return artistData.strArtistThumb
+    }
+  }
     
-  return <div>
-    <p>{artistData.strArtist}</p>
-    <p>{artistData.strLabel}</p>
-    <p>{artistData.strStyle}</p>
-    <p>{artistData.strGenre}</p>
-    <p>{artistData.strBiographyEN}</p>
+  return <div id='artistPage'>
+    <div id='imgBio'>
+      <img src={imageSelect()} 
+           alt={artistData.strArtist}
+           width='300px'/>
+      <div id='info'>
+        <div id='tags'>
+          <div>{artistData.strStyle}</div>
+          <div>{artistData.strGenre}</div>
+        </div>
+        <a href={artistData.strWebsite} target='_blank'>{artistData.strWebsite}</a>
+      </div>
+    </div>
+    <div id='nameDiscog'>
+      <h1 id='title'>{artistData.strArtist}</h1>
+      <div id='discog'>
+      </div>  
+    </div>
+    <div id='tracksPlaylist'>
+    </div>
   </div>
 }
 
