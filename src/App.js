@@ -5,13 +5,12 @@ import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Artist from './components/Artist'
+import store from './store/'
 import 'bulma'
 import './styles/style.scss'
 import Redux from 'redux'
 
 const App = () => {
-
-  const [artist, updateArtist] = useState('')
 
   return <BrowserRouter>
     <Navbar />
