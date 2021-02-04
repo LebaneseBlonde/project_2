@@ -1,19 +1,27 @@
-import axios from 'axios'
-import React, {Link} from 'react'
+import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
+function Home(props) {
+// export default function Home( { artist, updateArtist}) {
 
-export default function Home() {
-
-  const [artist, updateArtist] = useState('')
+console.log(props.inputValue)
+const artAlb = props.inputValue
 
   return <section className="hero is-primary is-fullheight-with-navbar">
     <div className="hero-body">
       <div className='container'>
         <div>
-          <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/>
+          {/* <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/> */}
+          <input className='input' 
+                 type='text' 
+                 placeholder='Artist/album name...' 
+                 width='200'
+                 value={props.inputValue}
+                 onChange={props.inputChanged}/>
         </div>
         <div className='container has-text-centered'>
-          <Link to={`project_2/artist/${artist}`}> 
+          <Link to={`/artist/${artAlb}`}> 
             <button className='button'>Search</button>
           </Link>
         </div>
@@ -21,3 +29,20 @@ export default function Home() {
     </div>
   </section>
 }
+
+function mapStateToProps(state){
+  return {
+    inputValue: state.inputValue
+  }
+} 
+
+function mapDispatchToProps(dispatch) {
+  return {
+    inputChanged: () => {
+      const action = {type: 'INPUT_CHANGE', text: event.target.value}
+      dispatch(action)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
