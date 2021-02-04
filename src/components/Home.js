@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function Home(props) {
@@ -13,12 +13,18 @@ const artAlb = props.inputValue
       <div className='container'>
         <div>
           {/* <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/> */}
-          <input className='input' 
-                 type='text' 
-                 placeholder='Artist/album name...' 
-                 width='200'
-                 value={props.inputValue}
-                 onChange={props.inputChanged}/>
+          <input 
+            className='input' 
+            type='text' 
+            placeholder='Artist/album name...' 
+            width='200'
+            value={props.inputValue}
+            onChange={props.inputChanged}
+            onKeyDown={(event) => {if(event.key == 'Enter'){
+              console.log('navigate')
+              navigate(`/artist/${artAlb}`)
+            }}} 
+          />
         </div>
         <div className='container has-text-centered'>
           <Link to={`/artist/${artAlb}`}> 
