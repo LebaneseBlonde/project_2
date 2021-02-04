@@ -8,10 +8,10 @@ function Home(props) {
 // console.log(props.inputValue)
 const artAlb = props.inputValue
 
-  return <section className="hero is-primary is-fullheight-with-navbar">
+  return <section className="hero is-fullheight-with-navbar">
     <div className="hero-body">
-      <div className='container'>
-        <div>
+        <div className='container'>
+        {/* <div className='container homepage-container'> */}
           {/* <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/> */}
           <input 
             className='input' 
@@ -25,7 +25,7 @@ const artAlb = props.inputValue
                 props.history.push(`/artist/${artAlb}`)
             }}} 
           />
-        </div>
+        {/* </div> */}
         <div className='container has-text-centered'>
           <Link to={`/artist/${artAlb}`}> 
             <button className='button'>Search</button>

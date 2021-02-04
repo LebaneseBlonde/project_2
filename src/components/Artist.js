@@ -66,13 +66,11 @@ function Artist(props) {
       <img id='artistImg' 
            src={imageSelect()} 
            alt={artistData.strArtist}
-           width='60%'/>
+           width='250px'/>
       <div id='info'>
-        <div id='tags' width='100%'>
-          <div className='tag'>{artistData.strStyle}</div>
-          <div className='tag'>{artistData.strGenre}</div>
-        </div>
         <a href={artistData.strWebsite} target='_blank'>{artistData.strWebsite}</a>
+        <p>Style: {artistData.strStyle}</p>
+        <p>Genre: {artistData.strGenre}</p>
         <p>Label: {artistData.strLabel}</p>
         <p>Members: {artistData.intMembers}</p>
         <p>Year Formed: {artistData.intFormedYear}</p>
@@ -80,11 +78,11 @@ function Artist(props) {
       </div>
     </div>
     <div id='nameDiscog'>
-      <h1 id='artistTitle'>{artistData.strArtist}</h1>
+      <h1 id='artistTitle' className='has-text-weight-bold'>{artistData.strArtist}</h1>
       <div id='bio'>
-        <p>{artistData.strBiographyEN.substr(0, 150) + '...'}<span id='more' onClick={() => updateModal('modal is-active')}>Read more</span></p>
+        <p>{artistData.strBiographyEN.substr(0, 150) + '...'}<a><span className='has-text-weight-semibold' id='more' onClick={() => updateModal('modal is-active')}>Read more</span></a></p>
       </div> 
-      <h2>Discography</h2>
+      <h2 className='has-text-weight-bold'>Discography</h2>
       <div id='discog'>
         {discog.map((album, index) => {
           return <div key={index} className='discogItem'>
@@ -104,14 +102,13 @@ function Artist(props) {
       </div> 
     </div>
     <div id='tracksPlaylist'>
-      <h2 id='topTitle'>Top Tracks</h2>
       <div id='topTracks'>
+      <h2 id='topTitle' className='has-text-weight-bold'>Top Tracks</h2>
         {top10.map((track, index) => {
         return <div key={index} className='topTrack'>
           <p>{index +1}. <a href={track.strMusicVid} target='_blank'>{track.strTrack}</a> | Album: {track.strAlbum}</p>
         </div>
       })}
-      <button>Play</button>
       </div>
       
     </div>
