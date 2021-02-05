@@ -2,11 +2,13 @@ import React, {useState} from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+
 function Home(props) {
 // export default function Home( { artist, updateArtist}) {
 
 // console.log(props.inputValue)
-const artAlb = props.inputValue
+  const artAlb = props.inputValue
+  const currentSong = props.currentSong
 
   return <section className="hero is-fullheight-with-navbar">
     <div className="hero-body">
@@ -38,7 +40,8 @@ const artAlb = props.inputValue
 
 function mapStateToProps(state){
   return {
-    inputValue: state.inputValue
+    inputValue: state.inputValue,
+    currentSong: state.currentSong
   }
 } 
 

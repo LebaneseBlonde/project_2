@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import Footer from './Footer'
 
 // const API_KEY = process.env.REACT_APP_APIKEY
 
 function Artist(props) {
-  const [currentSong, updateCurrentSong] = useState('https://www.youtube.com/watch?v=EVu8UqkFQI0')
+  const currentSong = props.currentSong
+  const updateCurrentSong = props.updateCurrentSong
+  const firstLoad = props.firstLoad
+  const updateFirstLoad = props.updateFirstLoad
   const [artistData, updateArtistData] = useState({})
   const [discog, updateDiscog] = useState([])
   const [top10, updateTop10] = useState([])
@@ -29,6 +31,7 @@ function Artist(props) {
         const info = data.artists[0]
         updateArtistData(info)
         updateLoading1(false)
+        updateFirstLoad(false)
       })
   }, [])
 
@@ -63,7 +66,7 @@ function Artist(props) {
   if (loading1 === true || loading2 === true || loading3 === true) {
     return <div>Loading...</div>
   } else {
-    console.log(top10)
+    console.log(artistData.strWebsite)
   }
     
   return <div id='artistPage'>
@@ -77,18 +80,17 @@ function Artist(props) {
              alt={artistData.strArtist}
              width='250px'/>
         <div id='info'>
-          <a href={artistData.strWebsite} target='_blank'>{artistData.strWebsite}</a>
+          <a href={`https://${artistData.strWebsite}`} target='_blank'>{artistData.strWebsite}</a>
           <p>Style: {artistData.strStyle}</p>
           <p>Genre: {artistData.strGenre}</p>
           <p>Label: {artistData.strLabel}</p>
           <p>Members: {artistData.intMembers}</p>
           <p>Year Formed: {artistData.intFormedYear}</p>
-          <p>Disbanded: {artistData.strDisbanded}</p>
         </div>
       </div>
       <div id='nameDiscog'>
         <div id='bio'>
-          <p>"{artistData.strBiographyEN.substr(0, 150) + '"' + '...'} <a><span   className='has-text-weight-semibold' id='more' onClick={() => updateModal('modal  is-active')}>Read more</span></a></p>
+          <p>'{artistData.strBiographyEN.substr(0, 150) + '...'} <a><span   className='has-text-weight-semibold' id='more' onClick={() => updateModal('modal  is-active')}>Read more</span></a></p>
         </div> 
         <h2 id='discogTitle' className='has-text-weight-bold'>Discography</h2>
         <div id='discog'>
@@ -130,39 +132,53 @@ function Artist(props) {
     <div className={modal}>
       <div className='modal-background' onClick={() => updateModal('modal')}></div>
       <div className='modal-card'>
-        <div className='modal-card-body'>
+        <header className='modal-card-head'>
+          <p className='modal-card-title'>Bio</p>
+          <button className='delete' aria-label='close' onClick={() => updateModal('modal')}></button>
+        </header>
+        <section className='modal-card-body'>
           <p>{artistData.strBiographyEN}</p>
-        </div>
-        <button className='modal-close is-large' 
-                aria-label='close'
-                onClick={() => updateModal('modal') }>
-        </button>
+        </section>
+        <footer className='modal-card-foot'>
+        </footer>
       </div>
     </div>
     <div className={albumModal}>
-      <div className="modal-background" onClick={() => updateAlbumModal('modal')}></div>
-      <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">{currentAlbum.name}</p>
-          <button className="delete" aria-label="close" onClick={() => updateAlbumModal('modal')}></button>
+      <div className='modal-background' onClick={() => updateAlbumModal('modal')}></div>
+      <div className='modal-card'>
+        <header className='modal-card-head'>
+          <p className='modal-card-title'>{currentAlbum.name}</p>
+          <button className='delete' aria-label='close' onClick={() => updateAlbumModal('modal')}></button>
         </header>
-        <section className="modal-card-body">
+        <section className='modal-card-body'>
           <img id='albumModalImage' src={currentAlbum.image} alt={currentAlbum.name}/>
         </section>
-        <footer id='albumFooter' className="modal-card-foot">
+        <footer id='albumFooter' className='modal-card-foot'>
           <p>Release Year: {currentAlbum.release}</p>
           <p>Release Format: {currentAlbum.format}</p>
         </footer>
       </div>
     </div>
-    <Footer currentSong={currentSong}/>
   </div>
 }
 
 function mapStateToProps(state){
   return {
-    inputValue: state.inputValue
+    inputValue: state.inputValue,
+    currentSong: state.currentSong,
+    firstLoad: state.firstLoad
   }
 } 
-
-export default connect(mapStateToProps)(Artist)
+function mapDispatchToProps(dispatch) {
+  return {
+    updateCurrentSong: (song) => {
+      const action = {type: 'SONG_CHANGE', song: song}
+      dispatch(action)
+    },
+    updateFirstLoad: (load) => {
+      const action = {type: 'UPDATE_FIRST_LOAD', load: load}
+      dispatch(action)
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Artist)

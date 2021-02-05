@@ -32,6 +32,13 @@ input {
   padding: 0px 400px;
 }
 
+.logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+	grid-gap: 0.5em;
+}
+
+
 #title {
   font-family: 'Quicksand', sans-serif;
 }
@@ -44,7 +51,7 @@ input {
 #artistPage {
   display: flex;
   flex-direction: column;
-  // height: 80vh;
+  // height: 100vh;
   margin-bottom:80px;
 }
 #artistTop {
