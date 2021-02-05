@@ -6,7 +6,7 @@ export default function Navbar() {
   return <nav className='navbar'>
     <Link className='navbar-brand' to='/'>
       <img src={logo} width='70' id='icon' className='navbar-item'></img>
-      <p className="navbar-item">Gitcogs</p>
+      <p className="navbar-item has-text-weight-bold" id='title'>GITCOGS</p>
     </Link>
     <div className='navbar-menu'>
       <div className="navbar-end">
@@ -14,7 +14,7 @@ export default function Navbar() {
           <div className="navbar-item">Home</div>
         </Link>
         <Link className="navbar-item" to='/map'>
-          <div className="navbar-item">Mapbox</div>
+          <div className="navbar-item">Geochart</div>
         </Link>
         <Link className="navbar-item" to='/about'>
           <div className="navbar-item">About</div>

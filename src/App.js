@@ -22,7 +22,6 @@ const App = () => {
       <Route exact path="/map" component={Mapbox}/>
       <Route exact path="/about" component={About}/>
     </Switch>
-    <Footer />
   </BrowserRouter>
 }
 

@@ -3,11 +3,9 @@ import ReactPlayer from 'react-player'
 
 
 export default function Footer() {
-  return <div>
-    <div>
-      <ReactPlayer
-        url="https://soundcloud.com/glennmorrison/beethoven-moonlight-sonata" controls width='100%' height='80px'
-      />
-    </div>
+  return <div  className='player'>  
+    <ReactPlayer
+      url="https://soundcloud.com/synkro/look-at-yourself" controls width='100%' height='80px'
+    />
   </div>
 }

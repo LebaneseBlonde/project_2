@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import Footer from './Footer'
+
 // const API_KEY = process.env.REACT_APP_APIKEY
 
 function Artist(props) {
@@ -32,7 +34,7 @@ function Artist(props) {
   useEffect(() => {
     axios.get(`https://www.theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${artAlb}`)
       .then((data) => {
-        const albumInfo = data.data.album
+        const albumInfo = data.data.album.filter((album) => album.strAlbumThumb !== null)
         updateDiscog(albumInfo)
         updateLoading2(false)
       })
@@ -62,55 +64,58 @@ function Artist(props) {
   }
     
   return <div id='artistPage'>
-    <div id='imgInfo'>
-      <img id='artistImg' 
-           src={imageSelect()} 
-           alt={artistData.strArtist}
-           width='250px'/>
-      <div id='info'>
-        <a href={artistData.strWebsite} target='_blank'>{artistData.strWebsite}</a>
-        <p>Style: {artistData.strStyle}</p>
-        <p>Genre: {artistData.strGenre}</p>
-        <p>Label: {artistData.strLabel}</p>
-        <p>Members: {artistData.intMembers}</p>
-        <p>Year Formed: {artistData.intFormedYear}</p>
-        <p>Disbanded: {artistData.strDisbanded}</p>
-      </div>
-    </div>
-    <div id='nameDiscog'>
+    <div id='artistTop'>
       <h1 id='artistTitle' className='has-text-weight-bold'>{artistData.strArtist}</h1>
-      <div id='bio'>
-        <p>{artistData.strBiographyEN.substr(0, 150) + '...'}<a><span className='has-text-weight-semibold' id='more' onClick={() => updateModal('modal is-active')}>Read more</span></a></p>
-      </div> 
-      <h2 className='has-text-weight-bold'>Discography</h2>
-      <div id='discog'>
-        {discog.map((album, index) => {
-          return <div key={index} className='discogItem'>
-            <img className='albumThumb' 
-                 src={album.strAlbumThumb}
-                 onClick={() => {
-                   updateCurrentAlbum({
-                     name:album.strAlbum,
-                     image:album.strAlbumThumb,
-                     release:album.intYearReleased,
-                     format:album.strReleaseFormat                    
-                   })
-                   updateAlbumModal('modal is-active')
-                 }}/>
+    </div>
+    <div id='artistBody'>
+      <div id='imgInfo'>
+        <img id='artistImg' 
+             src={imageSelect()} 
+             alt={artistData.strArtist}
+             width='250px'/>
+        <div id='info'>
+          <a href={artistData.strWebsite} target='_blank'>{artistData.strWebsite}</a>
+          <p>Style: {artistData.strStyle}</p>
+          <p>Genre: {artistData.strGenre}</p>
+          <p>Label: {artistData.strLabel}</p>
+          <p>Members: {artistData.intMembers}</p>
+          <p>Year Formed: {artistData.intFormedYear}</p>
+          <p>Disbanded: {artistData.strDisbanded}</p>
+        </div>
+      </div>
+      <div id='nameDiscog'>
+        <div id='bio'>
+          <p>"{artistData.strBiographyEN.substr(0, 150) + '"' + '...'} <a><span   className='has-text-weight-semibold' id='more' onClick={() => updateModal('modal  is-active')}>Read more</span></a></p>
+        </div> 
+        <h2 id='discogTitle' className='has-text-weight-bold'>Discography</h2>
+        <div id='discog'>
+          {discog.map((album, index) => {
+            return <div key={index} className='discogItem'>
+              <img className='albumThumb' 
+                   src={album.strAlbumThumb}
+                   onClick={() => {
+                     updateCurrentAlbum({
+                       name:album.strAlbum,
+                       image:album.strAlbumThumb,
+                       release:album.intYearReleased,
+                       format:album.strReleaseFormat                    
+                     })
+                     updateAlbumModal('modal is-active')
+                   }}/>
+            </div>
+          })}
+        </div> 
+      </div>
+      <div id='tracksPlaylist'>
+        <div id='topTracks'>
+        <h2 id='topTitle' className='has-text-weight-bold'>Top Tracks</h2>
+          {top10.map((track, index) => {
+          return <div key={index} className='topTrack'>
+            <p>{index +1}. <a href={track.strMusicVid} target='_blank'>{track.strTrack}</a> |   Album: {track.strAlbum}</p>
           </div>
         })}
-      </div> 
-    </div>
-    <div id='tracksPlaylist'>
-      <div id='topTracks'>
-      <h2 id='topTitle' className='has-text-weight-bold'>Top Tracks</h2>
-        {top10.map((track, index) => {
-        return <div key={index} className='topTrack'>
-          <p>{index +1}. <a href={track.strMusicVid} target='_blank'>{track.strTrack}</a> | Album: {track.strAlbum}</p>
         </div>
-      })}
       </div>
-      
     </div>
     <div className={modal}>
       <div className='modal-background' onClick={() => updateModal('modal')}></div>
@@ -134,12 +139,13 @@ function Artist(props) {
         <section className="modal-card-body">
           <img id='albumModalImage' src={currentAlbum.image} alt={currentAlbum.name}/>
         </section>
-        <footer className="modal-card-foot">
+        <footer id='albumFooter' className="modal-card-foot">
           <p>Release Year: {currentAlbum.release}</p>
           <p>Release Format: {currentAlbum.format}</p>
         </footer>
       </div>
     </div>
+    <Footer />
   </div>
 }
 

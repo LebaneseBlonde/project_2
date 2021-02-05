@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 input {
   margin-bottom: 50px;
+}
+
+.card {
+  margin-bottom: 10px;
+}
+
+
+.card-content {
+  padding: 10px;
 }
 
 .hero {
@@ -14,11 +25,15 @@ input {
 }
 
 .homepage-container {
-  max-width: 400px;
+  max-width: 300px;
 }
 
 .hero-body {
-  padding: 300px;
+  padding: 0px 400px;
+}
+
+#title {
+  font-family: 'Quicksand', sans-serif;
 }
 
 #icon:hover {
@@ -28,9 +43,17 @@ input {
 
 #artistPage {
   display: flex;
+  flex-direction: column;
+  // height: 80vh;
+  margin-bottom:80px;
+}
+#artistTop {
+  text-align:center;
+}
+#artistBody{
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 80vh;
 }
 #imgInfo {
   display: flex;
@@ -57,7 +80,7 @@ input {
   margin: 0 0 10px 0;
 }
 #artistImg {
-  margin: 40px 0 30px 0;
+  margin: 0 0 30px 0;
   border-radius: 3%;
 }
 #nameDiscog {
@@ -71,7 +94,7 @@ input {
   margin: 0 0 30px 0;
 }
 #artistTitle {
-  margin: 10px 0 40px 0;
+  margin: 0 0 20px 0;
 }
 #discog {
   display: flex;
@@ -84,10 +107,15 @@ input {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  // width: 80px;
+  // height: 80px;
+  // overflow: hidden;
 }
 .albumThumb{
+  width: 80px;
   height: 80px;
   margin: 5px;
+  border-radius: 3px;
 }
 #tracksPlaylist {
   display: flex;
@@ -100,7 +128,6 @@ input {
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: 40px 0 0 0;
   background: rgb(247, 247, 247);
   padding: 10px;
   border: 1px solid rgb(226, 226, 226);
@@ -111,4 +138,17 @@ input {
 }
 h1 {
   font-size: 60px;
+}
+#albumFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#discogTitle {
+  margin: 0 0 20px 0;
+}
+.player {
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
 }

@@ -35,33 +35,31 @@ export default function Mapbox() {
         setLoadingTrending(false)
     })
   }
-  
-    
-    
-   return <MapGL
-      { ...viewPort}
-      onViewportChange={(viewPort) => setViewport(viewPort)}
-      mapboxApiAccessToken={'pk.eyJ1IjoiY2FsaWd1bGEtbWF0ZSIsImEiOiJja2txdDdzaXEwcHV3MnVwOHJkOXNiOGh3In0.GXRuw26W0nWLGA_9reTm5A'}
-      mapStyle='mapbox://styles/caligula-mate/ckkr06ba32d6k17pg49o1fw1b'
-    >
-      {countries.map((country, index) => 
-        <Marker
-          key={index}
-          latitude={country.latlng[0]}
-          longitude={country.latlng[1]}
-          onClick={() => {
-            // setCountryCode('us')
-            cCode = country.code
-            cTitle = country.name
-            fetchCountryTrend()
-            toggleModal('modal is-active')
-          }}
-        >
-          <img width={20} key={index} src={marker}/>
-        </Marker>
-      )}
-      <TrendingModal loadingTrending={loadingTrending} songs={songs} setSongs={setSongs} modal={modal} toggleModal={toggleModal} countryTitle={countryTitle}/>
-    </MapGL>
+
+  return <MapGL
+     { ...viewPort}
+     onViewportChange={(viewPort) => setViewport(viewPort)}
+     mapboxApiAccessToken={'pk.eyJ1IjoiY2FsaWd1bGEtbWF0ZSIsImEiOiJja2txdDdzaXEwcHV3MnVwOHJkOXNiOGh3In0.GXRuw26W0nWLGA_9reTm5A'}
+     mapStyle='mapbox://styles/caligula-mate/ckkr06ba32d6k17pg49o1fw1b'
+   >
+     {countries.map((country, index) => 
+       <Marker
+         key={index}
+         latitude={country.latlng[0]}
+         longitude={country.latlng[1]}
+         onClick={() => {
+           // setCountryCode('us')
+           cCode = country.code
+           cTitle = country.name
+           fetchCountryTrend()
+           toggleModal('modal is-active')
+         }}
+       >
+         <img width={20} key={index} src={marker}/>
+       </Marker>
+     )}
+     <TrendingModal loadingTrending={loadingTrending} songs={songs} setSongs={setSongs} modal={modal} toggleModal={toggleModal} countryTitle={countryTitle}/>
+  </MapGL>
 }
 
 function TrendingModal({loadingTrending, songs, setSongs, modal, toggleModal, countryTitle}) {
@@ -81,10 +79,14 @@ function TrendingModal({loadingTrending, songs, setSongs, modal, toggleModal, co
       </header>
       <section className="modal-card-body">
           {songs.map((song, index) => {
-            return <div key={index}>
-              <h3 className='subtitle has-text-weight-semibold mb-1 mt-1'>{song.strTrack}</h3>
-              <p>Artist: {song.strArtist}</p>
-              <p>Album: {song.strAlbum}</p>
+            return <div className='card' key={index}>
+              <div className="card-content">
+                <div className="media-content">
+                  <p className="title is-6">{song.strTrack}</p>
+                  <p className="subtitle is-7 mb-1">Artist: {song.strArtist}</p>
+                  <p className="subtitle is-7 mb-1">Album: {song.strAlbum}</p>
+                </div>
+              </div>
             </div>
           })}
       </section>
