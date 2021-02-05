@@ -35,7 +35,9 @@ function Artist(props) {
   useEffect(() => {
     axios.get(`https://www.theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${artAlb}`)
       .then((data) => {
-        const albumInfo = data.data.album.filter((album) => album.strAlbumThumb !== null)
+        const albumInfo = data.data.album.filter((album) => {
+          return album.strAlbumThumb !== null && album.strAlbumThumb !== ''
+        })
         updateDiscog(albumInfo)
         updateLoading2(false)
       })
