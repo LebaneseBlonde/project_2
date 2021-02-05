@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-
 function Home(props) {
 // export default function Home( { artist, updateArtist}) {
 
@@ -13,7 +12,7 @@ function Home(props) {
   return <section className="hero is-fullheight-with-navbar">
     <div className="hero-body">
         <div className='container'>
-        {/* <div className='container homepage-container'> */}
+        <div className='container homepage-container'>
           {/* <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/> */}
           <input 
             className='input' 
@@ -27,7 +26,7 @@ function Home(props) {
                 props.history.push(`/artist/${artAlb}`)
             }}} 
           />
-        {/* </div> */}
+        </div>
         <div className='container has-text-centered'>
           <Link to={`/artist/${artAlb}`}> 
             <button className='button'>Search</button>

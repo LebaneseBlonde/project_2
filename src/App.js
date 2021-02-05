@@ -15,7 +15,7 @@ import Player from './components/Player'
 import './styles/style.scss'
 
 const App = (props) => {
-
+  const [search, setSearch] = useState('')
   const currentSong = props.currentSong
   const firstLoad = props.firstLoad
 

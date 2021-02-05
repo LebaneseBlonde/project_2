@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
+import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 
 export default function Navbar() {
   return <nav className='navbar'>

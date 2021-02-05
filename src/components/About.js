@@ -16,11 +16,11 @@ import webpackLogo from '../images/logos/webpack.png'
 export default function About() {
   const logos = [babelLogo, bulmaLogo, htmlLogo, jsLogo, mapboxLogo, reactLogo, reactRouterLogo, reduxLogo, sassLogo, webpackLogo]
 
-  return <div>
+  return <div className='aboutPage'>
     <h1 className='is-title-2 has-text-centered has-text-weight-bold mb-6'>Technologies Used</h1>
     <div className='container logos'>
       {logos.map((logo, index) => {
-        return <div className='container' key={index}>
+        return <div className='container techLogo' key={index}>
             <figure className='image is-128x128'>
               <img src={logo}/>
             </figure>

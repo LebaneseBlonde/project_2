@@ -178,6 +178,10 @@ function mapDispatchToProps(dispatch) {
     updateFirstLoad: (load) => {
       const action = {type: 'UPDATE_FIRST_LOAD', load: load}
       dispatch(action)
+    },
+    inputChanged: () => {
+      const action = {type: 'INPUT_CHANGE', text: event.target.value}
+      dispatch(action)
     }
   }
 }
