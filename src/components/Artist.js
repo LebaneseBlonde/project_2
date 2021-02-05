@@ -6,6 +6,7 @@ import Footer from './Footer'
 // const API_KEY = process.env.REACT_APP_APIKEY
 
 function Artist(props) {
+  const [currentSong, updateCurrentSong] = useState('https://www.youtube.com/watch?v=EVu8UqkFQI0')
   const [artistData, updateArtistData] = useState({})
   const [discog, updateDiscog] = useState([])
   const [top10, updateTop10] = useState([])
@@ -108,12 +109,19 @@ function Artist(props) {
       </div>
       <div id='tracksPlaylist'>
         <div id='topTracks'>
-        <h2 id='topTitle' className='has-text-weight-bold'>Top Tracks</h2>
+          <h2 id='topTitle' className='has-text-weight-bold'>Top Tracks</h2>
           {top10.map((track, index) => {
-          return <div key={index} className='topTrack'>
-            <p>{index +1}. <a href={track.strMusicVid} target='_blank'>{track.strTrack}</a> |   Album: {track.strAlbum}</p>
-          </div>
-        })}
+            if (track.strMusicVid) {
+              return <div key={index} className='topTrack'>
+                <p>{index +1}. <a onClick={() => updateCurrentSong(track.strMusicVid)}>
+                {track.strTrack}</a> |   Album: {track.strAlbum}</p>
+              </div>
+            } else {
+              return <div key={index} className='topTrack'>
+                <p>{index +1}. {track.strTrack} |   Album: {track.strAlbum}</p>
+              </div>
+            }
+          })}
         </div>
       </div>
     </div>
@@ -145,7 +153,7 @@ function Artist(props) {
         </footer>
       </div>
     </div>
-    <Footer />
+    <Footer currentSong={currentSong}/>
   </div>
 }
 
