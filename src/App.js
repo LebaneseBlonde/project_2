@@ -22,10 +22,10 @@ const App = (props) => {
   return <BrowserRouter>
     <Navbar />
     <Switch>
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/artist/:strArtist" component={Artist}/>
-      <Route exact path="/map" component={Mapbox}/>
-      <Route exact path="/about" component={About}/>
+      <Route exact path="/project_2/" component={Home}/>
+      <Route exact path="/project_2/artist/:strArtist" component={Artist}/>
+      <Route exact path="/project_2/map" component={Mapbox}/>
+      <Route exact path="/project_2/about" component={About}/>
     </Switch>
     <Player currentSong={currentSong} firstLoad={firstLoad} width='100%' height='80px'></Player>
   </BrowserRouter>

@@ -20,12 +20,12 @@ function Home(props) {
             onChange={props.inputChanged}
             onKeyDown={(event) => {
               if (event.key == 'Enter') {
-                props.history.push(`/artist/${artAlb}`)
+                props.history.push(`/project_2/artist/${artAlb}`)
             }}} 
           />
         </div>
         <div className='container has-text-centered'>
-          <Link to={`/artist/${artAlb}`}> 
+          <Link to={`/project_2/artist/${artAlb}`}> 
             <button className='button'>Search</button>
           </Link>
         </div>
