@@ -55,6 +55,15 @@ input {
   transition: all 0.25s ease-in-out;
 }
 
+#loading, #notFound {
+  min-height:80vh;
+  min-width:100vw;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  font-size:36px;
+}
+
 #artistPage {
   display: flex;
   flex-direction: column;

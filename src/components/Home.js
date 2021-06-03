@@ -3,9 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function Home(props) {
-// export default function Home( { artist, updateArtist}) {
 
-// console.log(props.inputValue)
   const artAlb = props.inputValue
   const currentSong = props.currentSong
 
@@ -13,7 +11,6 @@ function Home(props) {
     <div className="hero-body">
         <div className='container'>
         <div className='container homepage-container'>
-          {/* <input className='input' type='text' placeholder='Artist/album name...' width='200' onChange={(event) => updateArtist(event.target.value)}/> */}
           <input 
             className='input' 
             type='text' 

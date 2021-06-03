@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
-// const API_KEY = process.env.REACT_APP_APIKEY
-
 function Artist(props) {
   const currentSong = props.currentSong
   const updateCurrentSong = props.updateCurrentSong
   const firstLoad = props.firstLoad
   const updateFirstLoad = props.updateFirstLoad
+  const artAlb = props.inputValue
   const [artistData, updateArtistData] = useState({})
   const [discog, updateDiscog] = useState([])
   const [top10, updateTop10] = useState([])
@@ -18,7 +17,6 @@ function Artist(props) {
     release: '',
     format: ''
   })
-  const artAlb = props.inputValue
   const [loading1, updateLoading1] = useState(true)
   const [loading2, updateLoading2] = useState(true)
   const [loading3, updateLoading3] = useState(true)
@@ -28,31 +26,44 @@ function Artist(props) {
   useEffect(() => {
     axios.get(`https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${artAlb}`)
       .then(({data}) => {
-        const info = data.artists[0]
-        updateArtistData(info)
-        updateLoading1(false)
-        updateFirstLoad(false)
+        if (!data.artists) {
+          updateArtistData(false)
+          updateLoading1(false)
+        } else {
+          const info = data.artists[0]
+          updateArtistData(info)
+          updateLoading1(false)
+          updateFirstLoad(false)
+        }
       })
   }, [])
 
   useEffect(() => {
     axios.get(`https://www.theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${artAlb}`)
       .then((data) => {
-        const albumInfo = data.data.album.filter((album) => {
-          return album.strAlbumThumb !== null && album.strAlbumThumb !== ''
-        })
-        updateDiscog(albumInfo)
-        updateLoading2(false)
+        if (!data.data.album) {
+          updateLoading2(false)
+        } else {
+          const albumInfo = data.data.album.filter((album) => {
+            return album.strAlbumThumb !== null && album.strAlbumThumb !== ''
+          })
+          updateDiscog(albumInfo)
+          updateLoading2(false)
+        }
       })
   }, [])
 
   useEffect(() => {
     axios.get(`https://theaudiodb.com/api/v1/json/523532/track-top10.php?s=${artAlb}`)
       .then((data) => {
-        const tracksInfo = data.data.track
-        updateTop10(tracksInfo)
-        updateLoading3(false)
-      })
+        if (!data.data.track) {
+          updateLoading3(false)
+        } else {
+          const tracksInfo = data.data.track
+          updateTop10(tracksInfo)
+          updateLoading3(false)
+        }
+      }) 
   }, [])
 
   function imageSelect() {
@@ -64,11 +75,17 @@ function Artist(props) {
   }
 
   if (loading1 === true || loading2 === true || loading3 === true) {
-    return <div>Loading...</div>
-  } else {
-    console.log(artistData.strWebsite)
+    return <div id='loading'>
+      <p>Loading...</p>
+    </div>
   }
-    
+
+  if (!artistData) {
+    return <div id='notFound'>
+      <p>Sorry, artist not found.</p>
+    </div> 
+  }
+
   return <div id='artistPage'>
     <div id='artistTop'>
       <h1 id='artistTitle' className='has-text-weight-bold'>{artistData.strArtist}</h1>
@@ -161,7 +178,6 @@ function Artist(props) {
     </div>
   </div>
 }
-
 function mapStateToProps(state){
   return {
     inputValue: state.inputValue,
